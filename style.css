@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+html, body {
+  overscroll-behavior: none; /* Prevent page bounce on mobile */
+  height: 100%;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -14,6 +19,7 @@ body {
   font-family: Arial, sans-serif;
   background: #f0f0f0;
   transition: background 0.3s, color 0.3s;
+  touch-action: none; /* Prevent default touch behavior on body */
 }
 
 body.dark {
@@ -50,7 +56,7 @@ body.dark #darkModeToggle {
 
 .container {
   display: flex;
-  flex-direction: column; /* Stack on small screens */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -81,6 +87,7 @@ canvas {
   width: 800px;
   height: 500px;
   max-width: 90vw;
+  touch-action: none; /* Prevent scrolling/pinch-zoom */
 }
 
 .bottom-bar {
