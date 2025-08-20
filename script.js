@@ -14,22 +14,18 @@ let erasing = false;
 let currentStroke = null;
 let strokes = []; // Array of all strokes
 
-// Original canvas logical size
 const canvasWidth = 800;
 const canvasHeight = 500;
 
-// Get current background color based on theme
 function getCanvasBackground() {
   return document.body.classList.contains('dark') ? '#1a1a1a' : '#ffffff';
 }
 
-// Initialize canvas background
 function fillCanvasBackground() {
   ctx.fillStyle = getCanvasBackground();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-// Resize canvas while keeping strokes
 function resizeCanvas() {
   const ratio = canvasWidth / canvasHeight;
   const maxWidth = window.innerWidth * 0.95;
@@ -48,7 +44,6 @@ function resizeCanvas() {
   redrawCanvas();
 }
 
-// Start a new stroke
 function startPosition(e) {
   painting = true;
   currentStroke = {
@@ -60,7 +55,6 @@ function startPosition(e) {
   addPointToStroke(e);
 }
 
-// End the current stroke
 function endPosition() {
   if (!painting) return;
   painting = false;
@@ -70,7 +64,6 @@ function endPosition() {
   currentStroke = null;
 }
 
-// Add point to current stroke
 function addPointToStroke(e) {
   if (!painting) return;
   const rect = canvas.getBoundingClientRect();
@@ -82,7 +75,6 @@ function addPointToStroke(e) {
   redrawCanvas();
 }
 
-// Redraw entire canvas from strokes
 function redrawCanvas() {
   fillCanvasBackground();
   ctx.lineCap = 'round';
@@ -90,7 +82,6 @@ function redrawCanvas() {
     ctx.lineWidth = stroke.size;
     ctx.strokeStyle = stroke.color;
     ctx.globalCompositeOperation = stroke.type === 'eraser' ? 'destination-out' : 'source-over';
-
     ctx.beginPath();
     for (let i = 0; i < stroke.points.length; i++) {
       const p = stroke.points[i];
@@ -100,7 +91,6 @@ function redrawCanvas() {
     ctx.stroke();
   }
 
-  // Draw the current stroke as user draws
   if (currentStroke) {
     ctx.lineWidth = currentStroke.size;
     ctx.strokeStyle = currentStroke.color;
@@ -115,25 +105,21 @@ function redrawCanvas() {
   }
 }
 
-// Toggle eraser
 eraserBtn.addEventListener('click', () => {
   erasing = !erasing;
   eraserBtn.textContent = erasing ? 'Drawing Mode' : 'Eraser';
 });
 
-// Undo last stroke
 undoBtn.addEventListener('click', () => {
   strokes.pop();
   redrawCanvas();
 });
 
-// Clear all strokes
 clearBtn.addEventListener('click', () => {
   strokes = [];
   redrawCanvas();
 });
 
-// Save drawing
 saveBtn.addEventListener('click', () => {
   const link = document.createElement('a');
   const fileName = fileNameInput.value.trim() || 'my_drawing';
@@ -142,7 +128,6 @@ saveBtn.addEventListener('click', () => {
   link.click();
 });
 
-// Dark/light mode toggle
 darkModeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   document.body.classList.toggle('light');
@@ -155,13 +140,11 @@ canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', endPosition);
 canvas.addEventListener('mousemove', addPointToStroke);
 
-// Touch events (prevent scrolling)
+// Touch events (prevent scrolling/zoom)
 canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startPosition(e); }, { passive: false });
 canvas.addEventListener('touchmove', (e) => { e.preventDefault(); addPointToStroke(e); }, { passive: false });
 canvas.addEventListener('touchend', (e) => { e.preventDefault(); endPosition(); }, { passive: false });
 
-// Handle window resize
 window.addEventListener('resize', resizeCanvas);
 
-// Initialize
 resizeCanvas();
