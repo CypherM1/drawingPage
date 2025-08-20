@@ -150,13 +150,15 @@ darkModeToggle.addEventListener('click', () => {
   redrawCanvas();
 });
 
-// Event listeners for drawing
+// Mouse events
 canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', endPosition);
 canvas.addEventListener('mousemove', addPointToStroke);
-canvas.addEventListener('touchstart', startPosition);
-canvas.addEventListener('touchend', endPosition);
-canvas.addEventListener('touchmove', addPointToStroke);
+
+// Touch events (prevent scrolling)
+canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startPosition(e); }, { passive: false });
+canvas.addEventListener('touchmove', (e) => { e.preventDefault(); addPointToStroke(e); }, { passive: false });
+canvas.addEventListener('touchend', (e) => { e.preventDefault(); endPosition(); }, { passive: false });
 
 // Handle window resize
 window.addEventListener('resize', resizeCanvas);
