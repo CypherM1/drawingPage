@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawing App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+  <header>
+    <h2>🎨 Draw Something!</h2>
+    <span id="darkModeToggle">🌙</span>
+  </header>
+
+  <div class="container">
+    <div class="tools">
+      <label for="colorPicker">Color: </label>
+      <input type="color" id="colorPicker" value="#000000">
+      <label>Brush Size: <input type="number" id="brushSize" value="5" min="1" max="50" style="width:60px;"></label>
+      <button id="eraserBtn">Eraser</button>
+      <button id="undoBtn">Undo</button>
+      <button id="clearBtn">Clear Canvas</button>
+    </div>
+
+    <canvas id="canvas" width="800" height="500"></canvas>
+  </div>
+
+  <div class="bottom-bar">
+    <input type="text" id="fileName" placeholder="File name" value="my_drawing">
+    <button id="saveBtn">Save Drawing</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

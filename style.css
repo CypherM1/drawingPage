@@ -1,0 +1,133 @@
+/* --- Light & Dark Mode Colors --- */
+body.light {
+  --bg-color: #f0f0f0;
+  --text-color: #222;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+  --canvas-bg: white;
+  --toggle-color: #222;
+}
+
+body.dark {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --button-bg: #444;
+  --button-hover: #666;
+  --canvas-bg: #1a1a1a;
+  --toggle-color: gold;
+}
+
+/* --- General Styles --- */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1000px;
+  padding: 10px;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+#darkModeToggle {
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--toggle-color);
+  transition: color 0.3s;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding: 10px;
+}
+
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.tools label, .tools button, .tools input {
+  font-size: 14px;
+}
+
+canvas {
+  border: 2px solid #333;
+  border-radius: 8px;
+  background: var(--canvas-bg);
+  cursor: crosshair;
+  width: 800px;
+  height: 500px;
+  max-width: 90vw;
+}
+
+.bottom-bar {
+  margin-top: 10px;
+}
+
+button, input, select, label {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  background: var(--button-bg);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: var(--button-hover);
+}
+
+#colorPicker {
+  width: 60px;
+  height: 40px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .tools {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    order: 2;
+    margin-top: 10px;
+  }
+  canvas {
+    width: 95vw;
+    height: auto;
+    order: 1;
+  }
+  .bottom-bar {
+    order: 3;
+  }
+}
