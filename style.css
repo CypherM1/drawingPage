@@ -1,34 +1,24 @@
-/* --- Light & Dark Mode Colors --- */
-body.light {
-  --bg-color: #f0f0f0;
-  --text-color: #222;
-  --button-bg: #007bff;
-  --button-hover: #0056b3;
-  --canvas-bg: white;
-  --toggle-color: #222;
+/* Reset default margins/padding */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body.dark {
-  --bg-color: #121212;
-  --text-color: #f0f0f0;
-  --button-bg: #444;
-  --button-hover: #666;
-  --canvas-bg: #1a1a1a;
-  --toggle-color: gold;
-}
-
-/* --- General Styles --- */
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center; /* Center vertically */
   min-height: 100vh;
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: var(--bg-color);
-  color: var(--text-color);
+  background: #f0f0f0;
   transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: #121212;
+  color: #f0f0f0;
 }
 
 header {
@@ -47,35 +37,46 @@ h2 {
 #darkModeToggle {
   font-size: 24px;
   cursor: pointer;
-  color: var(--toggle-color);
   transition: color 0.3s;
+}
+
+body.light #darkModeToggle {
+  color: #222;
+}
+
+body.dark #darkModeToggle {
+  color: gold;
 }
 
 .container {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction: column; /* Stack on small screens */
+  align-items: center;
   justify-content: center;
   gap: 20px;
   width: 100%;
+  max-width: 1000px;
   padding: 10px;
 }
 
 .tools {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
-.tools label, .tools button, .tools input {
+.tools label,
+.tools button,
+.tools input {
   font-size: 14px;
 }
 
 canvas {
   border: 2px solid #333;
   border-radius: 8px;
-  background: var(--canvas-bg);
+  background: white;
   cursor: crosshair;
   width: 800px;
   height: 500px;
@@ -84,9 +85,16 @@ canvas {
 
 .bottom-bar {
   margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-button, input, select, label {
+button,
+input,
+select,
+label {
   padding: 8px 12px;
   border: none;
   border-radius: 6px;
@@ -94,14 +102,22 @@ button, input, select, label {
 }
 
 button {
-  background: var(--button-bg);
+  background: #007bff;
   color: white;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 button:hover {
-  background: var(--button-hover);
+  background: #0056b3;
+}
+
+body.dark button {
+  background: #444;
+}
+
+body.dark button:hover {
+  background: #666;
 }
 
 #colorPicker {
@@ -110,24 +126,10 @@ button:hover {
   cursor: pointer;
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .tools {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    order: 2;
-    margin-top: 10px;
-  }
   canvas {
     width: 95vw;
     height: auto;
-    order: 1;
-  }
-  .bottom-bar {
-    order: 3;
   }
 }
